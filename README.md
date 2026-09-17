@@ -1,171 +1,117 @@
-<img src="https://github.com/user-attachments/assets/e4d90e60-ee23-4e28-b9c1-ab35e68fed13" alt="Rivan Cyber Training Institute Logo" width="200">
+<div align="center">
 
-  <h1>RIVAN CYBER TRAINING INSTITUTE</h1>
-  <h2>Thunderbird</h2>
-  <h2>Encryption emails</h2>
+<img src="https://github.com/user-attachments/assets/e4d90e60-ee23-4e28-b9c1-ab35e68fed13" alt="Rivan Cyber Training Institute Logo" width="180">
+
+RIVAN CYBER TRAINING INSTITUTE
+
+Thunderbird
+
+OpenPGP Email Encryption Lab
+
 </div>
-
-<br>
 
 🎯 LAB OBJECTIVE
 
 Use Thunderbird OpenPGP to send an encrypted email so that only the intended recipient, who has the matching private/secret key, can decrypt and read it.
 
-🧭 At a Glance
+Laboratory Accounts
 
-👤 Sender
+Role
 
-📧 Recipient
+Account
 
-🔑 Encryption Key
-
-🔓 Decryption Key
-
-cs
-
-yourname
-
-yourname PUBLIC KEY
-
-yourname PRIVATE KEY
+Sender
 
 cs@bdo.ph.com
 
+Recipient
+
 yourname@bdo.ph.com
 
-Shared
+Important: Thunderbird may automatically decrypt an encrypted message when the recipient's private key is available. Seeing readable text in the recipient's inbox does not by itself mean that the email was sent unencrypted.
 
-Protected
+🧪 PART 1 — OPEN THUNDERBIRD
 
-🔐 The Core Concept
-
-        ┌──────────────┐
-        │      cs      │
-        │    SENDER    │
-        └──────┬───────┘
-               │
-               │ Encrypt with
-               │ YOURNAME PUBLIC KEY
-               ▼
-      ╔══════════════════════╗
-      ║   🔒 ENCRYPTED EMAIL ║
-      ╚══════════╤═══════════╝
-                 │
-                 │ Decrypt with
-                 │ YOURNAME PRIVATE KEY
-                 ▼
-        ┌─────────────────┐
-        │   📖 READABLE   │
-        │     MESSAGE     │
-        └─────────────────┘
-
-💡 Remember: Thunderbird may automatically decrypt an encrypted message when the recipient's private key is available. Seeing readable text in the recipient's inbox does not by itself mean the email was sent unencrypted.
-
-🧪 LABORATORY PROCEDURE
-
-01 · Open Thunderbird
+Step 1 — Open Thunderbird
 
 Start the Windows virtual machine containing Thunderbird.
-
-Do this
 
 Open Thunderbird.
 
 Make sure the appropriate email account is configured.
 
-Confirm the laboratory accounts below.
+Confirm that the laboratory accounts are available.
 
-┌─────────────────────────────────────────┐
-│  SENDER                                  │
-│  cs@bdo.ph.com                           │
-│                                         │
-│  RECIPIENT                               │
-│  yourname@bdo.ph.com                     │
-└─────────────────────────────────────────┘
+Sender: cs@bdo.ph.com
+Recipient: yourname@bdo.ph.com
 
-💡 Tip: Always verify the recipient address before sending an encrypted message.
+Tip: Verify the recipient address before sending an encrypted email.
 
-02 · Open the OpenPGP Key Manager
+🔑 PART 2 — CHECK OPENPGP KEYS
+
+Step 2 — Open the OpenPGP Key Manager
 
 In Thunderbird, open OpenPGP Key Manager.
 
 Review the keys currently available.
 
-You may see entries similar to:
+Look for keys associated with:
 
-🔑 cs <cs@bdo.ph.com>
-🔑 yourname <yourname@bdo.ph.com>
+cs <cs@bdo.ph.com>
 
-🔴 Key Safety
+yourname <yourname@bdo.ph.com>
 
-⚠️ CAUTION
+Caution: Do not delete a secret/private key unless you have a backup. The private key is required to decrypt messages encrypted for that account.
 
-Do not delete a secret/private key unless you have a backup.
-The private key is required to decrypt messages encrypted for that account.
+🔐 PART 3 — UNDERSTAND OPENPGP KEYS
 
-03 · Understand the OpenPGP Keys
+Step 3 — Understand the Public and Private Keys
 
 OpenPGP uses a public/private key pair.
 
-🔑 Key
+Public Key
+
+The sender uses the recipient's public key to encrypt the message.
+
+Private / Secret Key
+
+The recipient uses the matching private/secret key to decrypt the message.
+
+Key
 
 Purpose
 
-Can it be shared?
+Sharing
 
 Public key
 
-Encrypt messages for the owner
+Used to encrypt messages for the key owner
 
-✅ Yes
+Can be shared
 
-Private / secret key
+Private/secret key
 
-Decrypt messages for the owner
+Used to decrypt messages
 
-❌ No
+Must remain protected
 
-Encryption Flow
+Key Rule:
+Public key → Encrypt
+Private key → Decrypt
 
-       YOURNAME PUBLIC KEY
-                │
-                │  🔒 Encrypt
-                ▼
-      ┌───────────────────┐
-      │  ENCRYPTED EMAIL  │
-      └─────────┬─────────┘
-                │
-                │  🔓 Decrypt
-                │
-                ▼
-       YOURNAME PRIVATE KEY
-                │
-                ▼
-       ┌───────────────────┐
-       │  READABLE EMAIL   │
-       └───────────────────┘
+🔑 PART 4 — EXCHANGE THE PUBLIC KEY
 
-🔐 Key Rule
-
-PUBLIC KEY → ENCRYPT
-PRIVATE KEY → DECRYPT
-
-🔑 PUBLIC-KEY EXCHANGE
-
-04 · Make the Recipient Public Key Available to the Sender
+Step 4 — Make the Recipient Public Key Available to the Sender
 
 If cs does not have yourname's public key, Thunderbird may display:
 
-╔══════════════════════════════════╗
-║        Cannot Encrypt            ║
-║                                  ║
-║  yourname@bdo.ph.com             ║
-║  No key available.               ║
-╚══════════════════════════════════╝
+Cannot Encrypt
+yourname@bdo.ph.com
+No key available.
 
-This means Thunderbird cannot encrypt the message because a usable yourname public key is not available to cs.
+This means Thunderbird cannot encrypt a message to yourname because a usable public key is not available to cs.
 
-4.1 · Export the yourname Public Key
+Step 4.1 — Export the yourname Public Key
 
 On the yourname Thunderbird installation:
 
@@ -173,43 +119,35 @@ Open OpenPGP Key Manager.
 
 Select the yourname key.
 
-Open File.
+Open the File menu.
 
 Choose Export Public Key(s) To File.
 
-Save the key as an .asc file.
+Save the public key as an .asc file.
 
-Example:
-
-yourname-public.asc
-
-🛡️ Security Rule
-
-Export only the public key.
-Never distribute the secret/private key.
-
-05 · Transfer the Public Key to the cs VM
-
-Move:
+Example filename:
 
 yourname-public.asc
 
-from the yourname VM to the cs VM.
+Security Rule: Export only the public key. Never distribute the secret/private key.
 
-VMware Transfer Options
+Step 5 — Transfer the Public Key to the cs VM
 
-📁 VMware Shared Folders
+Move the following file from the yourname VM to the cs VM:
 
-📂 Laboratory file-transfer location
+yourname-public.asc
 
-🔄 Another controlled transfer method between the VMs
+You can use a controlled VMware laboratory transfer method, such as:
 
-ℹ️ Important
+VMware Shared Folders
 
-The .asc file is a public-key file.
-It is not the encrypted email itself.
+A laboratory file-transfer location
 
-06 · Import the yourname Public Key into cs's Thunderbird
+Another controlled method available between the VMs
+
+Important: The .asc file is a public-key file. It is not the encrypted email itself.
+
+Step 6 — Import the yourname Public Key into cs's Thunderbird
 
 On the cs Thunderbird VM:
 
@@ -219,51 +157,33 @@ Click File.
 
 Select Import Public Key(s) From File.
 
-Select:
-
-yourname-public.asc
+Select yourname-public.asc.
 
 Confirm the import.
 
-Verify that the yourname public key appears.
+Verify that the yourname public key appears in the Key Manager.
 
-✅ Checkpoint
+Confirm that the key is associated with yourname@bdo.ph.com.
 
-You should be able to locate a key associated with:
+✉️ PART 5 — SEND AN ENCRYPTED EMAIL
 
-yourname@bdo.ph.com
-
-✉️ SEND AN ENCRYPTED EMAIL
-
-07 · Compose an Encrypted Email
+Step 7 — Compose an Encrypted Email
 
 On the cs Thunderbird VM:
 
-Field
+Click Write / Compose.
 
-Enter
-
-To:
+Enter the recipient:
 
 yourname@bdo.ph.com
 
-Subject:
+Enter the subject:
 
 OpenPGP Encryption Test
 
-Message:
+Enter the message:
 
 This is an OpenPGP encryption test.
-
-Steps
-
-Click Write / Compose.
-
-Enter the recipient.
-
-Enter the subject.
-
-Enter the test message.
 
 Enable Encrypt.
 
@@ -271,85 +191,59 @@ Confirm that Thunderbird identifies the yourname public key for encryption.
 
 If "No Key Available" Appears
 
-Check:
+Open OpenPGP Key Manager.
 
-cs Thunderbird
-      │
-      ▼
-OpenPGP Key Manager
-      │
-      ▼
-yourname PUBLIC KEY
-      │
-      ▼
-yourname@bdo.ph.com
+Check that the yourname public key is present.
+
+Confirm that it is associated with yourname@bdo.ph.com.
 
 If the key is missing, import yourname-public.asc.
 
-08 · Send the Encrypted Email
+Step 8 — Send the Encrypted Email
 
 Once Thunderbird confirms that encryption is available:
 
-Review the recipient.
+Review the recipient address.
 
-Confirm Encrypt is enabled.
+Confirm that Encrypt is enabled.
 
 Click Send Encrypted.
 
-┌──────┐
-│  cs  │
-└──┬───┘
-   │
-   │ 🔒 Encrypt
-   ▼
-┌───────────────────────┐
-│ YOURNAME PUBLIC KEY   │
-└───────────┬───────────┘
-            │
-            ▼
-┌───────────────────────┐
-│ 🔒 ENCRYPTED EMAIL    │
-└───────────┬───────────┘
-            │
-            │ 🔓 Decrypt
-            ▼
-┌───────────────────────┐
-│ YOURNAME PRIVATE KEY  │
-└───────────┬───────────┘
-            │
-            ▼
-       📖 READABLE
-          MESSAGE
+Wait for the message to be sent.
 
-🔐 The recipient's corresponding private key is required to decrypt the message.
+Open the recipient's Thunderbird account.
 
-🔎 VERIFICATION
+Important: The recipient's corresponding private key is required to decrypt the encrypted message.
 
-09 · Verify That the Message Is Encrypted
+🔎 PART 6 — VERIFY ENCRYPTION
+
+Step 9 — Verify That the Message Is Encrypted
 
 Open the received message in Thunderbird.
 
-Look for the OpenPGP indicator or message security information.
+Look for the OpenPGP indicator.
 
-A correctly encrypted message may show:
+Open the message security information if available.
 
-🔒 Message Is Encrypted
+Confirm that Thunderbird shows information similar to:
 
-Thunderbird may also display information about the decryption key:
+Message Is Encrypted
 
-Your decryption key:
-0x...
+Thunderbird may also display information about the decryption key, such as:
+
+Your decryption key: 0x...
 
 A status such as:
 
-✓ Good Digital Signature
-🔒 Message Is Encrypted
+Good Digital Signature
 
-provides OpenPGP security information confirming encryption.
+Message Is Encrypted
 
-✅ Verification Table
+provides OpenPGP security information about the message.
 
-Test
+Verification
+
+Check
 
 Expected Result
 
@@ -357,13 +251,13 @@ Recipient
 
 yourname@bdo.ph.com
 
-Encryption enabled
+Encryption
 
-✅ Yes
+Enabled
 
 Message status
 
-🔒 Message Is Encrypted
+Message Is Encrypted
 
 Decryption key
 
@@ -371,32 +265,27 @@ yourname private key
 
 Message after decryption
 
-📖 Readable
+Readable
 
-📎 UNDERSTANDING .ASC FILES
+📎 PART 7 — UNDERSTAND THE .ASC ATTACHMENT
 
-10 · The .asc Attachment
+Step 10 — Understand the .asc Attachment
 
 An email may display an attachment similar to:
 
-📎 OpenPGP_0xXXXXXXXXXXXX.asc
+OpenPGP_0xXXXXXXXXXXXX.asc
 
 This .asc file is a public-key file.
 
 It is not the encrypted email.
 
-Email Structure
+The encrypted email is handled by OpenPGP/PGP-MIME, while the .asc attachment contains a public key that can be imported by another user.
 
-📧 EMAIL
-│
-├── 🔒 OpenPGP encrypted message
-│
-└── 📎 OpenPGP_0xXXXXXXXXXXXX.asc
-       └── 🔑 Public key
+Public Key vs. Encrypted Email
 
 Item
 
-Meaning
+Purpose
 
 .asc file
 
@@ -414,15 +303,13 @@ Private key
 
 Used to decrypt
 
-⚠️ Do not confuse the .asc public-key attachment with the encrypted message itself.
+Important: Do not confuse the .asc public-key attachment with the encrypted message itself.
 
-🧩 KEY-DEPENDENCY TEST
+🧩 PART 8 — TEST THE PRIVATE KEY REQUIREMENT
 
-11 · Demonstrate That a Private Key Is Required
+Step 11 — Demonstrate That a Private Key Is Required
 
-This test demonstrates that the recipient needs the matching private key to decrypt the encrypted message.
-
-Procedure
+This test demonstrates that the recipient needs the matching private key to decrypt an encrypted message.
 
 Keep the recipient's public key available to the sender.
 
@@ -430,39 +317,21 @@ Send a new encrypted message to yourname.
 
 Make sure the yourname Thunderbird profile does not have the corresponding private/secret key available.
 
-Open the received message.
+Open the received encrypted message.
 
-Observe whether Thunderbird can decrypt it.
+Observe whether Thunderbird can decrypt the message.
 
-Expected Behavior
+Expected Result
 
-Without the private key:
+Without the corresponding private key, Thunderbird should not be able to decrypt the encrypted message.
 
-🔒 ENCRYPTED MESSAGE
-          │
-          │ ❌ No matching private key
-          ▼
-     CANNOT DECRYPT
+With the correct private key available, Thunderbird should be able to decrypt the message.
 
-With the private key:
+Caution: Do not permanently delete a private key just for testing unless you have a backup. Removing the private key can make previously encrypted messages impossible to decrypt.
 
-🔒 ENCRYPTED MESSAGE
-          │
-          │ 🔑 Matching private key
-          ▼
-        DECRYPT
-          │
-          ▼
-     📖 READABLE
-       MESSAGE
+♻️ PART 9 — RESTORE THE PRIVATE KEY
 
-🚨 CAUTION
-
-Do not permanently delete a private key just for testing unless you have a backup. Removing the private key can make previously encrypted messages impossible to decrypt.
-
-♻️ RESTORE THE KEY
-
-12 · Restore the Recipient's Private Key
+Step 12 — Restore the Recipient's Private Key
 
 After completing the test:
 
@@ -470,101 +339,100 @@ Restore/import the yourname secret/private key from a trusted backup if it was r
 
 Open the encrypted message again.
 
-Confirm that Thunderbird can decrypt the message.
+Confirm that Thunderbird can decrypt the message when the correct private key is available.
 
-Expected Result
+🛠️ PART 10 — TROUBLESHOOTING
 
-🔑 YOURNAME PRIVATE KEY
-          │
-          ▼
-   🔓 Decrypt Message
-          │
-          ▼
-   📖 Readable Message
+Problem 1 — "Cannot Encrypt — No key available"
 
-🛠️ TROUBLESHOOTING
-
-❌ "Cannot Encrypt — No key available"
-
-Cause: The sender does not have a usable public key for the recipient.
+Cause: The sender does not currently have a usable public key for the recipient.
 
 Check
 
-cs Thunderbird
-      ↓
-OpenPGP Key Manager
-      ↓
-yourname PUBLIC KEY
+Open Thunderbird on the cs account.
 
-Solution: Import the yourname public key if it is missing.
+Open OpenPGP Key Manager.
 
-👀 "The recipient can read the message immediately"
+Confirm that the yourname public key is present.
 
-Cause: This is normally expected when the recipient's private key is installed in Thunderbird.
+Confirm that the key is associated with yourname@bdo.ph.com.
+
+Solution
+
+Import the yourname public key if it is missing.
+
+Problem 2 — The Recipient Can Read the Message Immediately
+
+This is normally expected when the recipient's private key is installed in Thunderbird.
 
 Thunderbird can automatically decrypt the message for the authorized recipient.
 
-ℹ️ Automatic decryption does not mean the message was sent as plaintext.
+Important: Automatic decryption does not mean that the message was sent as plaintext.
 
-Test: Make the recipient's private key unavailable and examine the behavior of the encrypted message.
+To test encryption, make the recipient's private key unavailable and examine the encrypted message.
 
-📎 "The .asc attachment is missing"
+Problem 3 — The .asc Attachment Is Missing
 
 The .asc file is a public-key attachment, not the encrypted message.
 
-If you specifically want Thunderbird to attach a public key to a message, check the account's OpenPGP/end-to-end encryption settings and the signing/public-key attachment options available in your Thunderbird version.
+If you specifically want Thunderbird to attach a public key to a message:
 
-🔐 The presence or absence of an .asc attachment does not determine whether the email itself is encrypted.
+Open the account's OpenPGP/end-to-end encryption settings.
 
-✅ FINAL LAB CHECKLIST
+Review the signing and public-key attachment options available in your Thunderbird version.
 
-Before completing the laboratory
+Enable the appropriate public-key attachment option if available.
 
-🔑 cs has a working OpenPGP key pair.
+Important: The presence or absence of an .asc attachment does not determine whether the email itself is encrypted.
 
-🔑 yourname has a working OpenPGP key pair.
+✅ PART 11 — FINAL LAB CHECKLIST
 
-📤 cs has yourname's public key.
+Before Completing the Laboratory
 
-🛡️ yourname's private key is kept secret.
+cs has a working OpenPGP key pair.
 
-🔒 cs can select Encrypt when composing to yourname.
+yourname has a working OpenPGP key pair.
 
-✅ Thunderbird reports Message Is Encrypted.
+cs has yourname's public key.
 
-🔓 yourname can decrypt the message with the correct private key.
+yourname's private key is kept secret.
 
-🚫 yourname cannot decrypt it when the corresponding private key is unavailable.
+cs can select Encrypt when composing to yourname.
 
-📎 Any .asc attachment is understood as a public-key file, not the encrypted message.
+Thunderbird reports Message Is Encrypted.
+
+yourname can decrypt the message when the correct private key is available.
+
+yourname cannot decrypt the message when the corresponding private key is unavailable.
+
+Any .asc attachment is understood as a public-key file, not the encrypted message.
 
 📚 QUICK REFERENCE
 
-The Three Things to Remember
+Action
 
-┌────────────────────────────────────────────────────────┐
-│                    🔐 OPENPGP                          │
-├────────────────────────────────────────────────────────┤
-│                                                        │
-│  ① PUBLIC KEY                                          │
-│     ↓                                                  │
-│     Used by the sender to ENCRYPT                     │
-│                                                        │
-│  ② ENCRYPTED MESSAGE                                   │
-│     ↓                                                  │
-│     Can only be opened with the matching secret key   │
-│                                                        │
-│  ③ PRIVATE / SECRET KEY                                │
-│     ↓                                                  │
-│     Used by the recipient to DECRYPT                  │
-│                                                        │
-└────────────────────────────────────────────────────────┘
+Key Required
 
-🔑 KEY RULE
+Encrypt an email to yourname
 
-PUBLIC KEY → 🔒 ENCRYPT
+yourname public key
 
-PRIVATE KEY → 🔓 DECRYPT
+Decrypt an email received by yourname
+
+yourname private/secret key
+
+Share with the sender
+
+Public key
+
+Keep protected
+
+Private/secret key
+
+🔐 REMEMBER
+
+PUBLIC KEY → ENCRYPT
+PRIVATE KEY → DECRYPT
 
 <div align="center">
 
@@ -572,7 +440,7 @@ PRIVATE KEY → 🔓 DECRYPT
 
 Cybersecurity Laboratory — OpenPGP Email Encryption
 
-THUNDERBIRD • OPENPGP • EMAIL SECURITY
+Thunderbird • OpenPGP • Email Security
 
 End of Laboratory Exercise
 
