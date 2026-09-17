@@ -1,5 +1,7 @@
 # Thunderbird OpenPGP Email Encryption Lab
 
+<img src="https://github.com/user-attachments/assets/e4d90e60-ee23-4e28-b9c1-ab35e68fed13" alt="Rivan Cyber Training Institute Logo" width="180">
+
 **Rivan Cyber Training Institute**
 
 ## Objective
