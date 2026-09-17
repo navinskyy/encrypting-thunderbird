@@ -1,14 +1,8 @@
-<div align="center">
+<img src="https://github.com/user-attachments/assets/e4d90e60-ee23-4e28-b9c1-ab35e68fed13" alt="Rivan Cyber Training Institute Logo" width="200">
 
-🛡️ RIVAN CYBER TRAINING INSTITUTE
-
-🔐 OpenPGP Email Encryption Lab
-
-THUNDERBIRD • OPENPGP • EMAIL SECURITY
-
-Laboratory Guide
-cs → yourname
-
+  <h1>RIVAN CYBER TRAINING INSTITUTE</h1>
+  <h2>Thunderbird</h2>
+  <h2>Encryption emails</h2>
 </div>
 
 <br>
