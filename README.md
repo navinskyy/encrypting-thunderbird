@@ -1,34 +1,68 @@
 <div align="center">
-  <h1>RIVAN CYBER TRAINING INSTITUTE</h1>
-  <h2>OpenPGP Email Encryption Lab</h2>
+
+🛡️ RIVAN CYBER TRAINING INSTITUTE
+
+OpenPGP Email Encryption Lab
+
+Cybersecurity Laboratory • Thunderbird • OpenPGP
+
 </div>
 
-<hr>
+[!NOTE]
+Lab Focus: Using Thunderbird OpenPGP to encrypt an email so that only the intended recipient, who possesses the corresponding private/secret key, can decrypt and read the message.
 
-Lab Objective
+🎯 Lab Objective
 
-This laboratory demonstrates how to use Thunderbird OpenPGP to send an encrypted email so that only the intended recipient, who possesses the corresponding private/secret key, can decrypt and read the message.
+This laboratory demonstrates how to use Thunderbird OpenPGP to send an encrypted email.
+
+The core concept is simple:
+
+┌──────────────┐
+│   Sender     │
+│      cs      │
+└──────┬───────┘
+       │
+       │ Encrypts using
+       │ yourname PUBLIC KEY
+       ▼
+┌──────────────────────┐
+│   ENCRYPTED EMAIL    │
+└──────────┬───────────┘
+           │
+           │ Decrypts using
+           │ yourname PRIVATE KEY
+           ▼
+┌──────────────────────┐
+│   READABLE MESSAGE   │
+│      yourname        │
+└──────────────────────┘
 
 Expected Result
 
-The final setup should work as follows:
+Role
 
-Sender (Anne)
-    |
-    | Encrypts using NAVS PUBLIC KEY
-    v
-Encrypted Email
-    |
-    v
-Recipient (NAVS)
-    |
-    | Decrypts using NAVS PRIVATE KEY
-    v
-Readable Message
+Account
 
-Important: Thunderbird normally decrypts an encrypted message automatically when the recipient's private key is available. Therefore, seeing readable plaintext in the recipient's Thunderbird window does not by itself mean the message was sent unencrypted.
+Key Used
 
-Step 1: Open Thunderbird
+Sender
+
+cs@bdo.ph.com
+
+yourname's public key
+
+Recipient
+
+yourname@bdo.ph.com
+
+yourname's private/secret key
+
+[!IMPORTANT]
+Thunderbird normally decrypts an encrypted message automatically when the recipient's private key is available. Therefore, seeing readable plaintext in the recipient's Thunderbird window does not by itself mean the message was sent unencrypted.
+
+🧪 Laboratory Procedure
+
+Step 1 — Open Thunderbird
 
 Start the Windows virtual machine containing Thunderbird.
 
@@ -36,12 +70,20 @@ Open Thunderbird.
 
 Make sure the appropriate email account is configured.
 
-For this laboratory:
+Confirm the laboratory accounts.
 
-Anne: cs@bdo.ph.com
-NAVS: navs@bdo.ph.com
+Laboratory Accounts
 
-Step 2: Open the OpenPGP Key Manager
+Sender:
+  cs@bdo.ph.com
+
+Recipient:
+  yourname@bdo.ph.com
+
+[!TIP]
+Verify the To: address carefully before sending an encrypted message. Thunderbird needs a usable public key that matches the recipient's address.
+
+Step 2 — Open the OpenPGP Key Manager
 
 In Thunderbird, open OpenPGP Key Manager.
 
@@ -49,58 +91,73 @@ Review the keys currently available.
 
 The Key Manager may contain keys similar to:
 
-Anne <cs@bdo.ph.com>
-navs <navs@bdo.ph.com>
+cs <cs@bdo.ph.com>
+yourname <yourname@bdo.ph.com>
 
-Important: Do not delete a secret/private key unless you have a backup. The private key is required to decrypt messages encrypted for that account.
+🔐 Key Safety
 
-Step 3: Understand the OpenPGP Keys
+[!CAUTION]
+Do not delete a secret/private key unless you have a backup. The private key is required to decrypt messages encrypted for that account.
+
+Step 3 — Understand the OpenPGP Keys
 
 OpenPGP uses a public/private key pair.
 
-Sender
+Public Key
 
 The sender needs the recipient's public key to encrypt the message.
 
-Recipient
+Private / Secret Key
 
 The recipient needs the matching private/secret key to decrypt the message.
 
-NAVS PUBLIC KEY
-       |
-       | Used by Anne to encrypt
-       v
-   ENCRYPTED EMAIL
-       |
-       | NAVS private key required
-       v
-NAVS PRIVATE KEY
-       |
-       v
-   DECRYPTED EMAIL
+Encryption Flow
 
-Important: The public key can be shared. The private/secret key must remain protected and should not be sent to other users.
+             YOURNAME PUBLIC KEY
+                      │
+                      │ Used by cs
+                      ▼
+              ┌───────────────┐
+              │ ENCRYPTED     │
+              │ EMAIL         │
+              └───────┬───────┘
+                      │
+                      │ Requires matching
+                      │ private/secret key
+                      ▼
+             YOURNAME PRIVATE KEY
+                      │
+                      ▼
+              ┌───────────────┐
+              │ DECRYPTED     │
+              │ EMAIL         │
+              └───────────────┘
 
-Step 4: Make the Recipient Public Key Available to the Sender
+[!IMPORTANT]
+The public key can be shared. The private/secret key must remain protected and should not be sent to other users.
 
-If Anne does not have NAVS's public key, Thunderbird will show an error similar to:
+🔑 Public-Key Exchange
+
+Step 4 — Make the Recipient Public Key Available to the Sender
+
+If cs does not have yourname's public key, Thunderbird may display an error similar to:
 
 Cannot Encrypt
 
-navs@bdo.ph.com
+yourname@bdo.ph.com
 No key available.
 
-This means Thunderbird cannot encrypt a message to NAVS because a usable NAVS public key is not available to Anne.
+This means Thunderbird cannot encrypt a message to yourname because a usable yourname public key is not available to cs.
 
-4.1 Export the NAVS Public Key
+4.1 — Export the yourname Public Key
 
-On the NAVS Thunderbird installation:
+On the yourname Thunderbird installation:
 
 Open OpenPGP Key Manager.
 
-Select the NAVS key.
+Select the yourname key.
 
-Use the File menu.
+Open the File menu.
 
 Choose the option to Export Public Key(s) To File.
 
@@ -108,13 +165,14 @@ Save the public key as an .asc file.
 
 Example:
 
-navs-public.asc
+yourname-public.asc
 
-Do not export or distribute the secret/private key. Only export the public key.
+[!CAUTION]
+Only export the public key. Do not export or distribute the secret/private key.
 
-Step 5: Transfer the Public Key to the Anne VM
+Step 5 — Transfer the Public Key to the cs VM
 
-Move the exported .asc public-key file from the NAVS VM to the Anne VM.
+Move the exported .asc public-key file from the yourname VM to the cs VM.
 
 Possible methods in a VMware laboratory include:
 
@@ -124,68 +182,115 @@ A laboratory file-transfer location
 
 Another controlled method available between the VMs
 
-Example file:
+Example:
 
-navs-public.asc
+yourname-public.asc
 
+[!NOTE]
 The .asc file is a public-key file. It is not the encrypted email itself.
 
-Step 6: Import the NAVS Public Key into Anne's Thunderbird
+Step 6 — Import the yourname Public Key into cs's Thunderbird
 
-On the Anne Thunderbird VM:
+On the cs Thunderbird VM:
 
 Open OpenPGP Key Manager.
 
 Click File.
 
-Select the option to Import Public Key(s) From File.
+Select Import Public Key(s) From File.
 
 Select:
 
-navs-public.asc
+yourname-public.asc
 
 Confirm the import.
 
-Verify that the NAVS public key now appears in Anne's OpenPGP Key Manager.
+Verify that the yourname public key appears in the OpenPGP Key Manager.
 
-Step 7: Compose an Encrypted Email
+Verification
 
-On Anne's Thunderbird:
+You should be able to locate a key associated with:
+
+yourname@bdo.ph.com
+
+✉️ Sending the Encrypted Email
+
+Step 7 — Compose an Encrypted Email
+
+On the cs Thunderbird VM:
 
 Click Write / Compose.
 
-Enter:
+Enter the recipient:
 
-To: navs@bdo.ph.com
+To: yourname@bdo.ph.com
+
+Enter the subject:
+
 Subject: OpenPGP Encryption Test
 
-Enter a test message, for example:
+Enter a test message:
 
 This is an OpenPGP encryption test.
 
 Enable Encrypt.
 
-Thunderbird should identify the NAVS public key as the key used for encryption.
+Thunderbird should identify the yourname public key as the key used for encryption.
 
-If Thunderbird reports:
+If Thunderbird Reports "No Key Available"
 
-No key available
+Verify:
 
-verify that the NAVS public key has been imported correctly.
+cs Thunderbird
+       │
+       ▼
+OpenPGP Key Manager
+       │
+       ▼
+yourname public key
+       │
+       ▼
+yourname@bdo.ph.com
 
-Step 8: Send the Encrypted Email
+If the key is missing, import the yourname-public.asc file again.
+
+Step 8 — Send the Encrypted Email
 
 After Thunderbird confirms that encryption is available:
+
+Review the recipient.
+
+Confirm that Encrypt is enabled.
 
 Click Send Encrypted.
 
 The message is sent using OpenPGP encryption.
 
+cs
+ │
+ │ Encrypt
+ │
+ ▼
+yourname PUBLIC KEY
+ │
+ ▼
+ENCRYPTED EMAIL
+ │
+ ▼
+yourname PRIVATE KEY
+ │
+ ▼
+READABLE MESSAGE
+
+[!IMPORTANT]
 The recipient's corresponding private key is required to decrypt the message.
 
-Important: Encryption protects the message contents while the message is being stored or transmitted. The recipient's Thunderbird may automatically decrypt it after receiving it if the required private key is available.
+[!NOTE]
+Encryption protects the message contents while the message is being stored or transmitted. The recipient's Thunderbird may automatically decrypt it after receiving it if the required private key is available.
 
-Step 9: Verify That the Message Is Encrypted
+🔎 Verification
+
+Step 9 — Verify That the Message Is Encrypted
 
 Open the received message in Thunderbird.
 
@@ -207,7 +312,35 @@ Message Is Encrypted
 
 the OpenPGP status information confirms that the message was encrypted.
 
-Step 10: Understand the .asc Attachment
+Verification Checklist
+
+Check
+
+Expected
+
+Recipient address
+
+yourname@bdo.ph.com
+
+Encryption enabled
+
+✅ Yes
+
+Message status
+
+Message Is Encrypted
+
+Recipient private key
+
+Available to decrypt
+
+Decrypted message
+
+Readable by authorized recipient
+
+📎 Understanding .asc Attachments
+
+Step 10 — Understand the .asc Attachment
 
 An email may display an attachment similar to:
 
@@ -219,99 +352,208 @@ It is not the encrypted email.
 
 The encrypted email is handled by OpenPGP/PGP-MIME, while the .asc attachment contains a public key that can be imported by another user.
 
-Example:
+Example Structure
 
 Email
 ├── OpenPGP encrypted message
 └── OpenPGP_0xXXXXXXXXXXXX.asc
     └── Public key
 
-Important: Do not mistake the .asc public-key attachment for the encrypted message itself.
+[!IMPORTANT]
+Do not mistake the .asc public-key attachment for the encrypted message itself.
 
-Step 11: Test the Requirement That a Key Is Needed
+Public Key vs. Encrypted Message
 
-To demonstrate that the recipient needs the private key:
+Item
+
+Purpose
+
+.asc public-key file
+
+Shares/imports a public key
+
+Encrypted email
+
+Protects the message contents
+
+Public key
+
+Used to encrypt
+
+Private/secret key
+
+Used to decrypt
+
+🧩 Key-Dependency Test
+
+Step 11 — Test the Requirement That a Key Is Needed
+
+This step demonstrates that the recipient needs the matching private key to decrypt the encrypted message.
+
+Procedure
 
 Keep the recipient's public key available to the sender.
 
-Send a new encrypted message to NAVS.
+Send a new encrypted message to yourname.
 
-Make sure the NAVS Thunderbird profile does not have the corresponding private/secret key available.
+Make sure the yourname Thunderbird profile does not have the corresponding private/secret key available.
 
 Open the received message.
 
-Without the corresponding private key, Thunderbird should not be able to decrypt the encrypted message.
+Observe whether Thunderbird can decrypt the message.
 
+Expected Behavior
+
+Without the corresponding private key:
+
+ENCRYPTED MESSAGE
+       │
+       │ No matching private key
+       ▼
+   CANNOT DECRYPT
+
+With the corresponding private key:
+
+ENCRYPTED MESSAGE
+       │
+       │ Matching private key
+       ▼
+     DECRYPT
+       │
+       ▼
+READABLE MESSAGE
+
+[!CAUTION]
 Do not permanently delete a private key just for testing unless you have a backup. Removing the private key can make previously encrypted messages impossible to decrypt.
 
-Step 12: Restore the Recipient's Private Key
+♻️ Key Restoration
+
+Step 12 — Restore the Recipient's Private Key
 
 After completing the test:
 
-Restore/import the NAVS secret/private key from a trusted backup if it was removed.
+Restore/import the yourname secret/private key from a trusted backup if it was removed.
 
 Open the encrypted message again.
 
-Thunderbird should be able to decrypt the message when the correct private key is available.
+Confirm that Thunderbird can decrypt the message when the correct private key is available.
 
-Troubleshooting
+Expected Result
+
+yourname PRIVATE KEY
+        │
+        ▼
+Decrypt OpenPGP Message
+        │
+        ▼
+Readable Message
+
+🛠️ Troubleshooting
 
 "Cannot Encrypt — No key available"
 
+Cause
+
 The sender does not currently have a usable public key for the recipient.
 
-Check:
+Check
 
-Anne Thunderbird
-    ↓
+cs Thunderbird
+      │
+      ▼
 OpenPGP Key Manager
-    ↓
-NAVS public key
+      │
+      ▼
+yourname public key
 
-Import the NAVS public key if it is missing.
+Solution
 
-The recipient can read the message immediately
+Import the yourname public key if it is missing.
+
+The Recipient Can Read the Message Immediately
+
+Cause
 
 This is normally expected when the recipient's private key is installed in Thunderbird.
 
-Thunderbird automatically decrypts the message for the authorized recipient.
+Thunderbird can automatically decrypt the message for the authorized recipient.
+
+Test
 
 To test whether encryption is actually protecting the message, test with the recipient's private key unavailable.
 
-The .asc attachment is missing
+[!NOTE]
+Automatic decryption in Thunderbird does not mean the message was sent as plaintext.
+
+The .asc Attachment Is Missing
 
 The .asc file is a public-key attachment, not the encrypted message.
 
 If you specifically want Thunderbird to attach a public key to a message, check the account's OpenPGP/end-to-end encryption settings and the signing/public-key attachment options available in your Thunderbird version.
 
+[!IMPORTANT]
 The presence or absence of this attachment does not determine whether the email itself is encrypted.
 
-Final Verification Checklist
+✅ Final Verification Checklist
 
-Before considering the laboratory complete, verify:
+Before considering the laboratory complete, verify each item:
 
-Anne has a working OpenPGP key pair.
+cs has a working OpenPGP key pair.
 
-NAVS has a working OpenPGP key pair.
+yourname has a working OpenPGP key pair.
 
-Anne has NAVS's public key.
+cs has yourname's public key.
 
-NAVS's private key is kept secret.
+yourname's private key is kept secret.
 
-Anne can select Encrypt when composing to NAVS.
+cs can select Encrypt when composing to yourname.
 
 Thunderbird reports Message Is Encrypted for the received message.
 
-NAVS can decrypt the message when the correct private key is available.
+yourname can decrypt the message when the correct private key is available.
 
-NAVS cannot decrypt the message when the corresponding private key is unavailable.
+yourname cannot decrypt the message when the corresponding private key is unavailable.
 
 Any .asc attachment is understood as a public-key file, not the encrypted message.
 
+📚 Quick Reference
+
+OpenPGP Encryption at a Glance
+
+┌──────────────────────────────────────────────────────────┐
+│                    OPENPGP WORKFLOW                      │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  1. yourname creates/owns a key pair                    │
+│                                                          │
+│       PUBLIC KEY  ─────────────► shared                  │
+│       PRIVATE KEY ─────────────► protected               │
+│                                                          │
+│  2. cs obtains yourname's PUBLIC KEY                    │
+│                                                          │
+│  3. cs writes an email                                  │
+│                                                          │
+│  4. Thunderbird encrypts using yourname's PUBLIC KEY    │
+│                                                          │
+│  5. Encrypted message is delivered                      │
+│                                                          │
+│  6. yourname uses the matching PRIVATE KEY              │
+│     to decrypt the message                              │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+
+Key Rule
+
+Public key → encrypt
+
+Private/secret key → decrypt
+
 <div align="center">
 
-RIVAN CYBER TRAINING INSTITUTE
+🛡️ RIVAN CYBER TRAINING INSTITUTE
 
 Cybersecurity Laboratory — OpenPGP Email Encryption
+
+End of Laboratory Exercise
 
 </div>
