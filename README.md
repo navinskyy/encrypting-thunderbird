@@ -21,6 +21,9 @@ Use Thunderbird's built-in OpenPGP support to send an encrypted email so that on
 
 ## Part 1 — Open Thunderbird
 
+<img width="975" height="732" alt="image" src="https://github.com/user-attachments/assets/8fb549b1-6461-49f5-82f8-53db59c3724f" />
+
+
 1. Start the Windows VM containing Thunderbird.
 2. Open Thunderbird and confirm the account is configured.
 3. Verify both lab accounts are available:
