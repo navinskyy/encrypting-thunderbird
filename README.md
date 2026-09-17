@@ -26,7 +26,7 @@ Use Thunderbird's built-in OpenPGP support to send an encrypted email so that on
 
 1. Start the Windows VM containing Thunderbird.
 2. Open Thunderbird and confirm the account is configured.
-3. Verify both lab accounts are available:
+3. Check if both accounts are available:
    - Sender: `cs@bdo.ph.com`
    - Recipient: `yourname@bdo.ph.com`
 
@@ -35,6 +35,8 @@ Use Thunderbird's built-in OpenPGP support to send an encrypted email so that on
 ---
 
 ## Part 2 — Check OpenPGP Keys
+
+<img width="975" height="449" alt="image" src="https://github.com/user-attachments/assets/8b98e45a-a143-4360-b7f4-3cdea21b8b62" />
 
 1. Open **OpenPGP Key Manager** in Thunderbird.
 2. Review the keys currently available, looking for:
