@@ -1,222 +1,315 @@
-# Thunderbird OpenPGP Email Encryption Lab
+<div align="center">
 
 <img src="https://github.com/user-attachments/assets/e4d90e60-ee23-4e28-b9c1-ab35e68fed13" alt="Rivan Cyber Training Institute Logo" width="180">
 
+# Thunderbird OpenPGP Email Encryption Lab
+
 **Rivan Cyber Training Institute**
+
+</div>
 
 ## Objective
 
-Use Thunderbird's built-in OpenPGP support to send an encrypted email so that only the intended recipient — the one holding the matching private key — can decrypt and read it.
+Use Thunderbird's built-in OpenPGP support to configure two email accounts in a single Thunderbird installation and send an encrypted email from one account to the other.
 
-## Lab Accounts
+The lab demonstrates:
+
+- OpenPGP public/private key pairs
+- Public-key exchange
+- Email encryption
+- Private-key-based decryption
+- Thunderbird's OpenPGP security indicators
+
+---
+
+## Lab Environment
+
+The lab uses **one Windows VM and one Thunderbird installation**, with two separate email accounts configured inside it.
 
 | Role | Account |
 |------|---------|
 | Sender | `cs@bdo.ph.com` |
-| Recipient | `yourname@bdo.ph.com` |
+| Recipient | `navs@bdo.ph.com` |
+| Virtual machines | 1 |
+| Thunderbird installations | 1 |
 
-> **Note:** Thunderbird may automatically decrypt a message when the recipient's private key is available locally. Seeing readable text in the recipient's inbox does not by itself prove the email was sent unencrypted.
+```text
+                ONE WINDOWS VM
+                     │
+                     ▼
+              ┌─────────────┐
+              │ Thunderbird │
+              └──────┬──────┘
+                     │
+            ┌────────┴────────┐
+            ▼                 ▼
+     cs@bdo.ph.com      navs@bdo.ph.com
+        SENDER              RECIPIENT
+```
+
+> **Note:** Both accounts live inside the same Thunderbird installation. There is no second VM involved in this lab.
 
 ---
 
 ## Part 1 — Open Thunderbird
 
-<img width="975" height="732" alt="image" src="https://github.com/user-attachments/assets/8fb549b1-6461-49f5-82f8-53db59c3724f" />
+<img width="700" alt="Thunderbird accounts" src="https://github.com/user-attachments/assets/8fb549b1-6461-49f5-82f8-53db59c3724f" />
 
-
-1. Start the Windows VM containing Thunderbird.
-2. Open Thunderbird and confirm the account is configured.
-3. Check if both accounts are available:
+1. Start the Windows VM.
+2. Open Thunderbird.
+3. Confirm that both email accounts are configured:
    - Sender: `cs@bdo.ph.com`
-   - Recipient: `yourname@bdo.ph.com`
+   - Recipient: `navs@bdo.ph.com`
+4. Verify both accounts appear in the Thunderbird account list.
 
-**Tip:** Double-check the recipient address before sending an encrypted email.
-
----
-
-## Part 2 — Check OpenPGP Keys
-
-<img width="975" height="449" alt="image" src="https://github.com/user-attachments/assets/8b98e45a-a143-4360-b7f4-3cdea21b8b62" />
-
-1. Open **OpenPGP Key Manager** in Thunderbird.
-2. Review the keys currently available, looking for:
-   - `cs <cs@bdo.ph.com>`
-   - `yourname <yourname@bdo.ph.com>`
-
-> **Caution:** Do not delete a secret/private key unless you have a backup. The private key is required to decrypt any message encrypted for that account.
+Because both accounts are inside the same Thunderbird installation, switching between sender and recipient is done directly within the app — no second machine required.
 
 ---
 
-## Part 3 — Public vs. Private Keys
+## Part 2 — Configure the Sender's OpenPGP Key (`cs@bdo.ph.com`)
 
-OpenPGP uses a public/private key pair:
+Open **Account Settings → End-to-End Encryption** for the `cs` account.
 
-| Key | Purpose | Sharing |
-|-----|---------|---------|
-| Public key | Encrypts messages *to* the key owner | Can be shared freely |
-| Private / secret key | Decrypts messages | Must stay protected |
+If the account doesn't already have an OpenPGP key:
+
+1. Click **Add Key...**
+2. Select **Create a new OpenPGP key pair**.
+3. Confirm the identity is `cs@bdo.ph.com`.
+4. Configure the key:
+
+   | Setting | Value |
+   |---------|-------|
+   | Key type | RSA |
+   | Key size | 3072 bits |
+   | Key expiration | 3 years |
+
+5. Click **Generate Key**.
+6. When prompted, choose **Yes, treat this key as a personal key**.
+
+The CS account now has its own key pair (public + private).
+
+---
+
+## Part 3 — Configure the Recipient's OpenPGP Key (`navs@bdo.ph.com`)
+
+Open **Account Settings → End-to-End Encryption** for the `navs` account and confirm it has its own OpenPGP key pair.
+
+Example key details observed during this lab:
+
+| Field | Value |
+|-------|-------|
+| Key ID | `0xB28EF8275BA88335` |
+| Fingerprint | `C17A 9F14 EB53 55D3 A064 528F B28E F827 5BA8 8335` |
+| Created | 09/16/2026 |
+| Expires | 09/15/2029 |
+| Associated identity | `navs@bdo.ph.com` |
+
+---
+
+## Part 4 — Public vs. Private Keys
+
+OpenPGP uses asymmetric cryptography:
+
+| Key | Function | Sharing |
+|-----|----------|---------|
+| Public key | Encrypts messages *for* the key owner | Can be shared |
+| Private/secret key | Decrypts messages sent *to* the key owner | Must remain secret |
 
 **Rule to remember:** Public key → Encrypt · Private key → Decrypt
 
+For this lab (CS sending to NAVS):
+
+```text
+CS  --(uses NAVS public key)-->  Encrypted message  --(NAVS private key)-->  Readable message
+```
+
 ---
 
-## Part 4 — Exchange the Public Key
+## Part 5 — Make NAVS's Public Key Available to CS
 
-If `cs` doesn't yet have `yourname`'s public key, Thunderbird will show:
+Since both accounts live in the same Thunderbird installation, there's no need to transfer a file between machines — the key just needs to be visible in the shared Key Manager.
 
-```
-Cannot Encrypt
-yourname@bdo.ph.com — No key available.
-```
+### Step 5.1 — Check the NAVS Key
 
-### Step 4.1 — Export yourname's Public Key
+Open **Account Settings → End-to-End Encryption** for `navs@bdo.ph.com` and confirm its OpenPGP key exists and is correctly associated with that address.
 
-On the **yourname** Thunderbird installation:
+### Step 5.2 — Export the NAVS Public Key (if needed)
 
 1. Open **OpenPGP Key Manager**.
-2. Select the `yourname` key.
-3. Go to **File → Export Public Key(s) To File**.
-4. Save it as `yourname-public.asc`.
+2. Select the NAVS key.
+3. Choose **Export Public Key(s)**.
+4. Save it as `navs-public.asc`.
 
 > **Security rule:** Export only the public key. Never distribute the secret/private key.
 
-### Step 4.2 — Transfer the Key to the cs VM
+### Step 5.3 — Make the Key Available for CS to Use
 
-Move `yourname-public.asc` from the `yourname` VM to the `cs` VM using a controlled lab method, e.g.:
+Confirm in **OpenPGP Key Manager** that `navs@bdo.ph.com` is available as a recipient key.
 
-- VMware Shared Folders
-- A designated lab file-transfer location
-- Another approved transfer method
+**Important:** Do not replace CS's personal key with NAVS's public key. The CS account should end up holding:
 
-> The `.asc` file is a public-key file — it is **not** the encrypted email itself.
-
-### Step 4.3 — Import the Key into cs's Thunderbird
-
-On the **cs** Thunderbird VM:
-
-1. Open **OpenPGP Key Manager**.
-2. Go to **File → Import Public Key(s) From File**.
-3. Select `yourname-public.asc` and confirm the import.
-4. Verify the key now appears in Key Manager, associated with `yourname@bdo.ph.com`.
+```text
+CS Account
+├── CS personal key pair (public + private)
+└── NAVS public key  →  used to encrypt mail TO NAVS
+```
 
 ---
 
-## Part 5 — Send an Encrypted Email
+## Part 6 — Initial Encryption Problem
 
-### Step 5.1 — Compose the Message
+When first attempting to send an encrypted email, Thunderbird may show:
 
-On the **cs** Thunderbird VM:
+```text
+Cannot Encrypt
+navs@bdo.ph.com — No key available.
+```
 
-1. Click **Write / Compose**.
-2. **To:** `yourname@bdo.ph.com`
-3. **Subject:** `OpenPGP Encryption Test`
-4. **Body:** `This is an OpenPGP encryption test.`
-5. Enable **Encrypt**.
-6. Confirm Thunderbird recognizes `yourname`'s public key for encryption.
-
-If **"No Key Available"** appears:
-- Open OpenPGP Key Manager and confirm the `yourname` public key is present and associated with the correct address.
-- If missing, re-import `yourname-public.asc`.
-
-### Step 5.2 — Send
-
-1. Review the recipient address.
-2. Confirm **Encrypt** is enabled.
-3. Click **Send Encrypted**.
-4. Wait for the message to send, then open the recipient's Thunderbird account.
-
-> The recipient's matching private key is required to decrypt this message.
+This means Thunderbird can't find a usable **public** key for `navs@bdo.ph.com`. It does **not** need NAVS's private key — only the public one.
 
 ---
 
-## Part 6 — Verify Encryption
+## Part 7 — Compose the Encrypted Email
 
-1. Open the received message.
-2. Look for the OpenPGP indicator and check the message security details.
-3. Confirm Thunderbird reports something like:
-   - `Message Is Encrypted`
-   - `Your decryption key: 0x...`
-   - `Good Digital Signature`
+Switch to the `cs@bdo.ph.com` account and click **Write / Compose**.
 
-| Check | Expected Result |
-|-------|-----------------|
-| Recipient | `yourname@bdo.ph.com` |
-| Encryption | Enabled |
-| Message status | Message Is Encrypted |
-| Decryption key | yourname's private key |
-| Message after decryption | Readable |
+```text
+From:    cs@bdo.ph.com
+To:      navs@bdo.ph.com
+Subject: OpenPGP Encryption Test
+```
+
+Example message:
+
+> Hello Navs,
+>
+> This is a test email for our OpenPGP encryption laboratory. The purpose of this message is to demonstrate encrypted email communication using Thunderbird.
+>
+> Test ID: PGP-001
+>
+> Regards,
+> CS Lab
 
 ---
 
-## Part 7 — The `.asc` Attachment
+## Part 8 — Enable Encryption
 
-You may see an attachment like `OpenPGP_0xXXXXXXXXXXXX.asc` on a message.
+Before sending:
+
+1. Verify the recipient: `navs@bdo.ph.com`
+2. Click the **Encrypt 🔒** button.
+3. Confirm Thunderbird recognizes the recipient's public key and the earlier **No key available** warning is gone.
+
+```text
+Plaintext → [NAVS public key] → Encrypted message → Email server
+    → NAVS's Thunderbird → [NAVS private key] → Decrypted message
+```
+
+---
+
+## Part 9 — Send the Message
+
+1. Check the sender address.
+2. Check the recipient address.
+3. Confirm the encryption/lock indicator is enabled.
+4. Send the email.
+
+CS uses **NAVS's public key** to encrypt the message.
+
+---
+
+## Part 10 — Verify the Received Message
+
+Switch Thunderbird from `cs@bdo.ph.com` to `navs@bdo.ph.com` and open the received message.
+
+Thunderbird may auto-decrypt it, since NAVS's private key is available in the same installation — so the message may just look like normal readable text.
+
+> **Important:** Readable text does not mean the message was sent unencrypted. Check the message's OpenPGP/security information — it should show **Message Is Encrypted**, along with details about the decryption key used.
+
+---
+
+## Part 11 — Public-Key / Private-Key Relationship
+
+| Account | Public key | Private key |
+|---------|-----------|-------------|
+| `cs@bdo.ph.com` | Used by others to encrypt *to* CS | Used by CS to decrypt |
+| `navs@bdo.ph.com` | Used by CS to encrypt *to* NAVS | Used by NAVS to decrypt |
+
+**CS → NAVS:** `CS → (encrypt with NAVS public key) → encrypted email → (NAVS private key) → readable email`
+
+**NAVS → CS:** `NAVS → (encrypt with CS public key) → encrypted email → (CS private key) → readable email`
+
+---
+
+## Part 12 — The `.asc` Public-Key File
+
+An exported OpenPGP public key looks like `navs-public.asc`.
 
 | Item | Purpose |
 |------|---------|
-| `.asc` file | Public-key file |
-| Encrypted email | Protected message contents (handled via PGP/MIME) |
-| Public key | Used to encrypt |
-| Private key | Used to decrypt |
+| `navs-public.asc` | NAVS's public-key file |
+| NAVS public key | Encrypts messages to NAVS |
+| NAVS private key | Decrypts messages sent to NAVS |
+| Encrypted email | The protected message contents |
 
-> Don't confuse the `.asc` public-key attachment with the encrypted message itself.
+> The `.asc` file is **not** the encrypted email — it's just the key.
 
 ---
 
-## Part 8 — Test the Private Key Requirement
+## Part 13 — Test the Private-Key Requirement
 
-This demonstrates that decryption is impossible without the correct private key.
+Purpose: prove that the public key alone cannot decrypt a message.
 
-1. Keep the recipient's public key available to the sender.
-2. Send a new encrypted message to `yourname`.
-3. Ensure the `yourname` Thunderbird profile does **not** have the matching private key available.
-4. Open the received encrypted message and observe whether Thunderbird can decrypt it.
+1. Send an encrypted message from `cs@bdo.ph.com` to `navs@bdo.ph.com` (encrypted with NAVS's public key).
+2. Temporarily make NAVS's private key unavailable.
+3. Try to open the encrypted message.
 
 **Expected result:**
-- Without the private key → Thunderbird **cannot** decrypt the message.
-- With the private key available → Thunderbird **can** decrypt the message.
+- Without NAVS's private key → decryption **fails**.
+- With NAVS's private key available → decryption **succeeds**, message is readable.
 
-> **Caution:** Don't permanently delete a private key for this test unless you have a backup — doing so can make previously encrypted messages unrecoverable.
-
----
-
-## Part 9 — Restore the Private Key
-
-1. Restore/import `yourname`'s secret key from a trusted backup if it was removed.
-2. Reopen the encrypted message.
-3. Confirm Thunderbird can now decrypt it with the correct private key in place.
+> **Caution:** Don't permanently delete the private key for this test — back it up first, or use another safe method to make it temporarily unavailable.
 
 ---
 
-## Part 10 — Troubleshooting
+## Part 14 — Troubleshooting
 
 **"Cannot Encrypt — No key available"**
-- *Cause:* `cs` doesn't currently have a usable public key for `yourname`.
-- *Fix:* Open OpenPGP Key Manager on the `cs` account, confirm the `yourname` public key is present and correctly associated, and import it if missing.
+- *Cause:* Thunderbird can't find a usable public key for `navs@bdo.ph.com`.
+- *Fix:* Open OpenPGP Key Manager, confirm the NAVS key's email identity and fingerprint, and import/refresh the public key for the CS account if needed.
 
-**The recipient can read the message immediately**
-- This is expected when the recipient's private key is installed locally — Thunderbird auto-decrypts for the authorized recipient.
-- Automatic decryption does *not* mean the message was sent as plaintext.
-- To verify encryption is actually happening, temporarily remove the private key and re-check the message (see Part 8).
+**Importing NAVS's public key gives an error**
+- Make sure you're not trying to import NAVS's public-only key as a *personal* key for CS — CS already has its own personal key pair. NAVS's key should sit alongside it as a recipient-only key:
+  ```text
+  CS Personal Key: CS Public Key + CS Private Key
+  Other/Recipient Keys: NAVS Public Key
+  ```
 
-**The `.asc` attachment is missing**
-- The `.asc` file is only a public-key attachment, not the encrypted message itself.
-- To have Thunderbird attach your public key automatically, check the account's OpenPGP / end-to-end encryption settings for a public-key attachment option and enable it if available.
-- Whether or not the `.asc` attachment is present has no bearing on whether the email itself is encrypted.
+**The received email is readable right away**
+- Expected when Thunderbird has NAVS's private key locally and auto-decrypts. Readable message ≠ plaintext email — verify via the message's OpenPGP/security info.
+
+**Encrypt button is unavailable**
+- Check that: CS has a personal key, NAVS has a key, NAVS's public key is available to Thunderbird, the recipient address is exactly `navs@bdo.ph.com`, the key isn't expired, and there's no "No key available" warning.
 
 ---
 
-## Part 11 — Final Lab Checklist
+## Part 15 — Final Lab Checklist
 
-- [ ] `cs` has a working OpenPGP key pair
-- [ ] `yourname` has a working OpenPGP key pair
-- [ ] `cs` has `yourname`'s public key
-- [ ] `yourname`'s private key is kept secret
-- [ ] `cs` can select **Encrypt** when composing to `yourname`
-- [ ] Thunderbird reports **Message Is Encrypted**
-- [ ] `yourname` can decrypt the message when the correct private key is available
-- [ ] `yourname` cannot decrypt the message when the private key is unavailable
-- [ ] Any `.asc` attachment is correctly understood as a public-key file, not the encrypted message
+- [ ] One Windows VM was used
+- [ ] One Thunderbird installation was used
+- [ ] `cs@bdo.ph.com` configured as sender
+- [ ] `navs@bdo.ph.com` configured as recipient
+- [ ] CS has a personal OpenPGP key pair
+- [ ] NAVS has a personal OpenPGP key pair
+- [ ] NAVS's public key is available to Thunderbird
+- [ ] NAVS's private key remains protected
+- [ ] CS can select **Encrypt** when sending to NAVS
+- [ ] Thunderbird recognizes NAVS's public key
+- [ ] An encrypted email was sent from CS to NAVS
+- [ ] Thunderbird reports the received message as encrypted
+- [ ] NAVS can decrypt the message with its private key
+- [ ] The public/private key distinction was demonstrated
+- [ ] The `.asc` file was correctly identified as a public-key file, not the message
 
 ---
 
@@ -224,14 +317,44 @@ This demonstrates that decryption is impossible without the correct private key.
 
 | Action | Key Required |
 |--------|--------------|
-| Encrypt an email to `yourname` | `yourname`'s **public** key |
-| Decrypt an email received by `yourname` | `yourname`'s **private/secret** key |
-| Share with the sender | Public key |
-| Keep protected, never share | Private/secret key |
+| CS encrypts email to NAVS | NAVS **public** key |
+| NAVS decrypts email | NAVS **private** key |
+| NAVS encrypts email to CS | CS **public** key |
+| CS decrypts email | CS **private** key |
+| Public key | Safe to distribute |
+| Private key | Keep secret |
 
-**Remember:** Public key → Encrypt · Private key → Decrypt
+**Remember:** 🔓 Public key → Encrypt · 🔐 Private key → Decrypt
 
 ---
 
+## Lab Result
+
+This lab demonstrated OpenPGP email encryption using **two separate email accounts within a single Thunderbird installation**.
+
+The sender (`cs@bdo.ph.com`) used the recipient's (`navs@bdo.ph.com`) **public key** to encrypt the email. Thunderbird then used the recipient's corresponding **private key**, available locally, to decrypt the message.
+
+```text
+             ONE THUNDERBIRD INSTALLATION
+                         │
+              ┌──────────┴──────────┐
+              ▼                     ▼
+       cs@bdo.ph.com          navs@bdo.ph.com
+          SENDER                  RECIPIENT
+              │                     ▲
+              │   NAVS PUBLIC KEY   │
+              ├────────────────────►│
+              ▼                     │
+       ENCRYPTED EMAIL ─────────────┘
+                                    │
+                              NAVS PRIVATE KEY
+                                    ▼
+                             READABLE MESSAGE
+```
+
+<div align="center">
+
 *Rivan Cyber Training Institute — Cybersecurity Laboratory*
 *Thunderbird · OpenPGP · Email Security*
+
+</div>
