@@ -68,6 +68,8 @@ Because both accounts are inside the same Thunderbird installation, switching be
 
 ## Part 2 — Configure the Sender's OpenPGP Key (`cs@bdo.ph.com`)
 
+<img width="975" height="731" alt="image" src="https://github.com/user-attachments/assets/536dc064-ca80-4fb7-af53-d71beb1ec6bc" />
+
 Open **Account Settings → End-to-End Encryption** for the `cs` account.
 
 If the account doesn't already have an OpenPGP key:
@@ -88,9 +90,13 @@ If the account doesn't already have an OpenPGP key:
 
 The CS account now has its own key pair (public + private).
 
+<img width="975" height="709" alt="image" src="https://github.com/user-attachments/assets/387b6460-e2ea-4b01-81ea-a90d5b2cf958" />
+
 ---
 
 ## Part 3 — Configure the Recipient's OpenPGP Key (`navs@bdo.ph.com`)
+
+<img width="975" height="731" alt="image" src="https://github.com/user-attachments/assets/22d7f201-b848-49a7-9bb5-0648b44e650c" />
 
 Open **Account Settings → End-to-End Encryption** for the `navs` account and confirm it has its own OpenPGP key pair.
 
@@ -117,7 +123,7 @@ OpenPGP uses asymmetric cryptography:
 
 **Rule to remember:** Public key → Encrypt · Private key → Decrypt
 
-For this lab (CS sending to NAVS):
+For this lab (CS sending to emman):
 
 ```text
 CS  --(uses NAVS public key)-->  Encrypted message  --(NAVS private key)-->  Readable message
