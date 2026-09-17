@@ -223,6 +223,9 @@ Plaintext → [emman public key] → Encrypted message → Email server
 
 ## Part 9 — Send the Message
 
+<img width="975" height="511" alt="image" src="https://github.com/user-attachments/assets/196b5456-dbc9-44fd-8ed4-03dc192b04ed" />
+
+
 1. Check the sender address.
 2. Check the recipient address.
 3. Confirm the encryption/lock indicator is enabled.
