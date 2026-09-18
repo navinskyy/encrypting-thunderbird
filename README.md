@@ -162,20 +162,7 @@ CS Account
 
 ---
 
-## Part 6 — Initial Encryption Problem
-
-When first attempting to send an encrypted email, Thunderbird may show:
-
-```text
-Cannot Encrypt
-emman@bdo.ph.com — No key available.
-```
-
-This means Thunderbird can't find a usable **public** key for `emman@bdo.ph.com`. It does **not** need emman's private key — only the public one.
-
----
-
-## Part 7 — Compose the Encrypted Email
+## Part 6 — Compose the Encrypted Email
 
 <img width="623" height="472" alt="image" src="https://github.com/user-attachments/assets/ed0855f6-b309-462e-83cb-d52641b54acd" />
 
@@ -203,7 +190,7 @@ Example message:
 **or just send the website that you use for testing**
 ---
 
-## Part 8 — Enable Encryption
+## Part 7 — Enable Encryption
 
 <img width="546" height="58" alt="image" src="https://github.com/user-attachments/assets/13ab6b7b-65ed-46ee-b2cf-2a8f6f4cbd02" />
 
@@ -221,7 +208,7 @@ Plaintext → [emman public key] → Encrypted message → Email server
 
 ---
 
-## Part 9 — Send the Message
+## Part 8 — Send the Message
 
 <img width="975" height="511" alt="image" src="https://github.com/user-attachments/assets/196b5456-dbc9-44fd-8ed4-03dc192b04ed" />
 
@@ -235,17 +222,19 @@ CS uses **emman's public key** to encrypt the message.
 
 ---
 
-## Part 10 — Verify the Received Message
+## Part 9 — Verify the Received Message
 
-Switch Thunderbird from `cs@bdo.ph.com` to `emman@bdo.ph.com` and open the received message.
+<img width="461" height="623" alt="image" src="https://github.com/user-attachments/assets/76b38504-e621-4896-8c2b-cc50cfb80acc" />
 
 Thunderbird may auto-decrypt it, since emman's private key is available in the same installation — so the message may just look like normal readable text.
+
+<img width="975" height="694" alt="image" src="https://github.com/user-attachments/assets/99217385-bd44-4774-a70a-48808be14ad9" />
 
 > **Important:** Readable text does not mean the message was sent unencrypted. Check the message's OpenPGP/security information — it should show **Message Is Encrypted**, along with details about the decryption key used.
 
 ---
 
-## Part 11 — Public-Key / Private-Key Relationship
+## Part 10 — Public-Key / Private-Key Relationship
 
 | Account | Public key | Private key |
 |---------|-----------|-------------|
@@ -258,7 +247,7 @@ Thunderbird may auto-decrypt it, since emman's private key is available in the s
 
 ---
 
-## Part 12 — The `.asc` Public-Key File
+## Part 11 — The `.asc` Public-Key File
 
 An exported OpenPGP public key looks like `emman-public.asc`.
 
@@ -273,23 +262,7 @@ An exported OpenPGP public key looks like `emman-public.asc`.
 
 ---
 
-## Part 13 — Test the Private-Key Requirement
-
-Purpose: prove that the public key alone cannot decrypt a message.
-
-1. Send an encrypted message from `cs@bdo.ph.com` to `emman@bdo.ph.com` (encrypted with emman's public key).
-2. Temporarily make emman's private key unavailable.
-3. Try to open the encrypted message.
-
-**Expected result:**
-- Without emman's private key → decryption **fails**.
-- With emman's private key available → decryption **succeeds**, message is readable.
-
-> **Caution:** Don't permanently delete the private key for this test — back it up first, or use another safe method to make it temporarily unavailable.
-
----
-
-## Part 14 — Troubleshooting
+## Part 12 — Troubleshooting
 
 **"Cannot Encrypt — No key available"**
 - *Cause:* Thunderbird can't find a usable public key for `emman@bdo.ph.com`.
@@ -310,7 +283,7 @@ Purpose: prove that the public key alone cannot decrypt a message.
 
 ---
 
-## Part 15 — Final Lab Checklist
+## Part 13 — Final Lab Checklist
 
 - [ ] One Windows VM was used
 - [ ] One Thunderbird installation was used
@@ -352,7 +325,7 @@ This lab demonstrated OpenPGP email encryption using **two separate email accoun
 The sender (`cs@bdo.ph.com`) used the recipient's (`emman@bdo.ph.com`) **public key** to encrypt the email. Thunderbird then used the recipient's corresponding **private key**, available locally, to decrypt the message.
 
 ```text
-             ONE THUNDERBIRD INSTALLATION
+                    THUNDERBIRD
                          │
               ┌──────────┴──────────┐
               ▼                     ▼
