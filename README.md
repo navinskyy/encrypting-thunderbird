@@ -1,4 +1,4 @@
-<div align="center">
+<img width="975" height="733" alt="image" src="https://github.com/user-attachments/assets/7430a8a5-9c63-4808-b371-963f0beea1fe" /><div align="center">
 
 # 🔐 Encrypting Email with OpenPGP in Thunderbird
 
@@ -130,7 +130,7 @@ The sender needs their **own key pair**. Thunderbird uses it to **sign** the mes
 Start the Windows VM and open Thunderbird. In the left panel you should see **both** accounts: `cs@bdo.ph.com` and `emman@bdo.ph.com`.
 
 <p align="center">
-  <img src="images/01-thunderbird-overview.png" width="720" alt="Thunderbird main window showing both accounts cs@bdo.ph.com and emman@bdo.ph.com in the left folder pane">
+  <img width="975" height="732" alt="image" src="https://github.com/user-attachments/assets/1832faa7-9047-4815-9134-509494976d01" />
 </p>
 
 **What you're seeing:** Thunderbird's home screen. Each account has its own Inbox, Sent, and Trash folders.
@@ -140,7 +140,7 @@ Start the Windows VM and open Thunderbird. In the left panel you should see **bo
 Click the **☰ menu** (three lines, top-right) and choose **Account Settings**.
 
 <p align="center">
-  <img src="images/02-main-menu.png" width="360" alt="Thunderbird hamburger menu with Account Settings highlighted in the list">
+  <img width="663" height="819" alt="image" src="https://github.com/user-attachments/assets/dad36761-30f6-42fc-9b8a-4b06380b3b96" />
 </p>
 
 ### Step 3 — Go to End-To-End Encryption
@@ -148,7 +148,7 @@ Click the **☰ menu** (three lines, top-right) and choose **Account Settings**.
 In the left list, find the `cs@bdo.ph.com` account and click **End-To-End Encryption**. Every account has its own entry with this name.
 
 <p align="center">
-  <img src="images/03-account-settings.png" width="720" alt="Account Settings tab with the cs@bdo.ph.com account expanded and End-To-End Encryption listed">
+ <img width="975" height="344" alt="image" src="https://github.com/user-attachments/assets/073fa8e4-4257-4db5-b61d-bf2304037ff0" />
 </p>
 
 You will now see the encryption page. Notice the message next to the key icon:
@@ -156,7 +156,7 @@ You will now see the encryption page. Notice the message next to the key icon:
 > *"Thunderbird doesn't have a personal OpenPGP key for **cs@bdo.ph.com**"*
 
 <p align="center">
-  <img src="images/04-sender-e2ee-no-key.png" width="700" alt="End-To-End Encryption page saying Thunderbird does not have a personal OpenPGP key for cs@bdo.ph.com, with an Add Key button">
+  <img width="975" height="449" alt="image" src="https://github.com/user-attachments/assets/3fed98ff-8263-4e9e-a0f1-d6e56cf9d16d" />
 </p>
 
 **What this means:** the account has no key pair yet, so it cannot send signed or encrypted email. Let's fix that.
@@ -164,7 +164,7 @@ You will now see the encryption page. Notice the message next to the key icon:
 ### Step 4 — Click **Add Key…** and choose *Create a new OpenPGP Key*
 
 <p align="center">
-  <img src="images/05-add-key-dialog.png" width="620" alt="Dialog with two options: Create a new OpenPGP Key (selected) and Import an existing OpenPGP Key">
+  <img width="975" height="501" alt="image" src="https://github.com/user-attachments/assets/ca8f0ca4-31a2-4569-addf-d09426b36fbd" />
 </p>
 
 | Option | When to use it |
@@ -177,7 +177,7 @@ Click **Continue**.
 ### Step 5 — Choose the key settings
 
 <p align="center">
-  <img src="images/06-sender-generate-key.png" width="720" alt="Generate OpenPGP Key dialog for identity anne cs@bdo.ph.com with key expiry 3 years, key type RSA, key size 3072">
+  <img width="975" height="731" alt="image" src="https://github.com/user-attachments/assets/28c665ed-6b7a-47db-b3f0-1763ff4a3ccd" />
 </p>
 
 Set the following:
@@ -196,7 +196,7 @@ Click **Generate key**.
 Thunderbird warns that this can take **several minutes**.
 
 <p align="center">
-  <img src="images/07-confirm-generation.png" width="640" alt="Confirmation dialog: Key generation may take up to several minutes. Generate public and secret key for anne cs@bdo.ph.com. Cancel and Confirm buttons">
+  <img width="975" height="661" alt="image" src="https://github.com/user-attachments/assets/66088369-8a7b-4729-8f7a-b07d6bed6368" />
 </p>
 
 > [!TIP]
@@ -207,7 +207,7 @@ Click **Confirm** and wait.
 ### Step 7 — Success! Your sender now has a key
 
 <p align="center">
-  <img src="images/08-sender-key-created.png" width="620" alt="Green banner reading OpenPGP Key created successfully, showing key ID 0x8B85C0C6C8B789E5 for cs@bdo.ph.com">
+  <img width="975" height="709" alt="image" src="https://github.com/user-attachments/assets/b34e0b21-3756-4765-b279-98c5bbee2a53" />
 </p>
 
 The green banner **"OpenPGP Key created successfully!"** confirms it. Thunderbird also shows the **Key ID**: a short label that identifies this key. In our screenshot it is `0x8B85C0C6C8B789E5`. (Yours will be different. Every key ID is unique.)
@@ -231,7 +231,7 @@ Now we do the **same thing for the recipient**. This is important: emman needs a
 In Account Settings, this time select **End-To-End Encryption** under **`emman@bdo.ph.com`**.
 
 <p align="center">
-  <img src="images/09-recipient-e2ee-no-key.png" width="720" alt="End-To-End Encryption page for emman@bdo.ph.com saying Thunderbird does not have a personal OpenPGP key">
+  <img width="975" height="731" alt="image" src="https://github.com/user-attachments/assets/95ac51d1-41c4-46ca-b04e-06864a1785b8" />
 </p>
 
 > [!WARNING]
@@ -242,13 +242,13 @@ In Account Settings, this time select **End-To-End Encryption** under **`emman@b
 Click **Add Key…**, keep **Create a new OpenPGP Key** selected, and click **Continue**.
 
 <p align="center">
-  <img src="images/10-recipient-add-key-dialog.png" width="700" alt="Add Key dialog for the emman account with Create a new OpenPGP Key selected">
+ <img width="975" height="737" alt="image" src="https://github.com/user-attachments/assets/e475f34f-78ff-4335-a5d7-6e7517796904" />
 </p>
 
 ### Step 10 — Use the same settings as before
 
 <p align="center">
-  <img src="images/11-recipient-generate-key.png" width="720" alt="Generate OpenPGP Key dialog for identity emman emman@bdo.ph.com with key expiry 3 years, RSA, 3072">
+  <img width="975" height="733" alt="image" src="https://github.com/user-attachments/assets/aad31408-726f-4a6c-9f97-433bdd361b25" />
 </p>
 
 | Setting | Value |
@@ -277,7 +277,7 @@ Click **Generate key → Confirm**, and wait for the green success message, just
 In the left panel, click the **`cs@bdo.ph.com`** account. You will see its home page with links such as *Read messages*, *Write a new message*, and *End-to-end Encryption*.
 
 <p align="center">
-  <img src="images/12-sender-account-home.png" width="720" alt="cs@bdo.ph.com account home page listing Inbox, Drafts, Sent and Trash, and links to write a new message">
+  <img width="975" height="734" alt="image" src="https://github.com/user-attachments/assets/c263917b-5190-49ef-97b0-510aa7193fd7" />
 </p>
 
 Click **Write a new message** (or the blue **New Message** button).
@@ -285,7 +285,7 @@ Click **Write a new message** (or the blue **New Message** button).
 ### Step 12 — Fill in the email
 
 <p align="center">
-  <img src="images/13-compose-window.png" width="720" alt="Compose window: From anne cs@bdo.ph.com, To emman@bdo.ph.com, Subject Email Encrypted, body containing the link https://www.bdo.ph.com, and a banner saying OpenPGP end-to-end encryption is possible">
+  <img width="975" height="738" alt="image" src="https://github.com/user-attachments/assets/3fcdacc1-9cd3-4811-81cf-e12fbda8a2b2" />
 </p>
 
 | Field | Value |
@@ -311,7 +311,7 @@ This is **good news**. It means Thunderbird found a usable **public key for emma
 Click the **Encrypt** button in the toolbar (or in the banner). When encryption is on, the button looks **pressed in**, like this:
 
 <p align="center">
-  <img src="images/14-encrypt-button-on.png" width="540" alt="Compose toolbar with the Encrypt button shown in its pressed, enabled state">
+  <img width="852" height="103" alt="image" src="https://github.com/user-attachments/assets/b0ded902-4421-46c2-a7bd-1887f2504ed5" />
 </p>
 
 ### Step 15 — Send
@@ -340,7 +340,7 @@ Then click **Send**.
 Click **Inbox** under `emman@bdo.ph.com` and select the newest message, **"Email Encrypted"** from Anne.
 
 <p align="center">
-  <img src="images/15-recipient-inbox.png" width="760" alt="emman's inbox with the message Email Encrypted from anne selected and readable in the reading pane, with the OpenPGP lock and signature icons at the top right of the message header">
+  <img width="975" height="511" alt="image" src="https://github.com/user-attachments/assets/621a4fc3-909c-4084-905c-2891808aec27" />
 </p>
 
 You will notice something that surprises many students: **the message is perfectly readable.**
@@ -363,7 +363,7 @@ You can see the proof at the top-right of the message header, next to the word *
 Click the **OpenPGP** icons in the message header. A **Message Security — OpenPGP** panel opens:
 
 <p align="center">
-  <img src="images/16-message-security-popup.png" width="440" alt="Message Security OpenPGP panel showing Good Digital Signature, Message Is Encrypted, the decryption key ID, and that the message was also encrypted to emman with key 0x9A1C3BF03B5A4FB1">
+  <img width="700" height="717" alt="image" src="https://github.com/user-attachments/assets/4ffa1e9d-b93c-42a4-be39-c5d01ac04905" />
 </p>
 
 Here is how to read it, section by section:
@@ -391,13 +391,13 @@ Thunderbird showed you readable text, but is the email *really* encrypted while 
 Open the message, **right-click** inside the message body, and choose **Save As…**.
 
 <p align="center">
-  <img src="images/17-save-as-menu.png" width="420" alt="Right-click menu on the message body with Save As highlighted near the bottom">
+  <img width="709" height="970" alt="image" src="https://github.com/user-attachments/assets/50b7c88c-3ecf-4c67-9a65-fc2f09795182" />
 </p>
 
 ### Step 19 — Choose where to save it
 
 <p align="center">
-  <img src="images/18-save-message-dialog.png" width="620" alt="Save Message As dialog in the Documents folder with the Save as type dropdown open, listing Mail Files, HTML Files, Text Files and All Files">
+  <img width="969" height="747" alt="image" src="https://github.com/user-attachments/assets/bbe03ba7-deee-4957-8b9f-3006307b2bea" />
 </p>
 
 Save it in your **Documents** folder. The **Save as type** list offers *Mail Files*, *HTML Files*, *Text Files*, and *All Files*. You can also see the earlier `CS-public.asc` and `emman-public.asc` key files in this folder (see [the `.asc` section](#where-do-asc-files-fit-in)).
@@ -407,13 +407,13 @@ Save it in your **Documents** folder. The **Save as type** list offers *Mail Fil
 Open **File Explorer**, right-click the file you just saved, choose **Open with → Notepad**.
 
 <p align="center">
-  <img src="images/19-open-with-notepad.png" width="720" alt="File Explorer with the saved message right-clicked and the Open with submenu showing Notepad and Thunderbird">
+  <img width="975" height="670" alt="image" src="https://github.com/user-attachments/assets/a68753c8-1387-4a8f-aee8-fa2a8fc7ecc6" />
 </p>
 
 ### Step 21 — Read the top of the file: the headers
 
 <p align="center">
-  <img src="images/20-notepad-headers.png" width="760" alt="Notepad showing the email headers: Return-Path, Received, Date, To emman@bdo.ph.com, From anne cs@bdo.ph.com, an Autocrypt header with keydata, Subject with three dots, and Content-Type multipart/encrypted">
+    <img width="975" height="694" alt="image" src="https://github.com/user-attachments/assets/2ae1bc56-58b2-48e0-9bf6-1589a3cf7b71" />
 </p>
 
 | Line | What it tells you |
@@ -426,11 +426,11 @@ Open **File Explorer**, right-click the file you just saved, choose **Open with 
 ### Step 22 — Scroll down: the encrypted body
 
 <p align="center">
-  <img src="images/21-notepad-begin-pgp.png" width="560" alt="Notepad showing Content-Disposition inline filename encrypted.asc followed by BEGIN PGP MESSAGE and lines of random-looking characters">
+  <img width="867" height="711" alt="image" src="https://github.com/user-attachments/assets/d0bc5db7-4c97-4f4e-8f9c-2bb30c0b8d8a" />
 </p>
 
 <p align="center">
-  <img src="images/22-notepad-end-pgp.png" width="560" alt="Notepad showing the end of the encrypted block with the line END PGP MESSAGE">
+  <img width="880" height="461" alt="image" src="https://github.com/user-attachments/assets/1c90ec94-c70a-4648-9d89-7f6c44bb78d0" />
 </p>
 
 Everything between
