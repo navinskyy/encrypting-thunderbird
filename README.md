@@ -1,5 +1,3 @@
-<img width="975" height="733" alt="image" src="https://github.com/user-attachments/assets/7430a8a5-9c63-4808-b371-963f0beea1fe" /><div align="center">
-
 # 🔐 Encrypting Email with OpenPGP in Thunderbird
 
 **A step-by-step, screenshot-guided lab**
